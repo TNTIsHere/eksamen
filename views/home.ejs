@@ -1,0 +1,54 @@
+<%- include("partials/header"); -%>
+<% if (user.username === id) { %>
+    <form class="add-doc">
+        <h2>Create a wishlist</h2>
+        <label for="wish">Wish <%= ++wishlist.length %>:</label>
+        <input type="text" name="wish" required>
+        <div class="wish error"></div>
+        <button>Add Wish</button>
+    </form>
+<% } else { %>
+    <h2>You are not authorized to view this page</h2>
+<% } %>
+<div>
+    
+</div>
+
+<script>
+    // Adding wish
+    const addForm = document.querySelector(".add-doc");
+    const wishError = document.querySelector(".wish.error");
+    const welcome = document.querySelector(".welcome");
+
+    addForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        wishError.textContent = "";
+        const wish1 = addForm.wish.value;
+        const username = welcome.dataset.doc;
+
+        try {
+            const res = await fetch("/addwish", {
+                method: "POST",
+                body: JSON.stringify({ wish1, username }),
+                headers: { "Content-Type": "application/json" }
+            });
+            const data = await res.json();
+            console.log(data);
+
+            if (data.errors) {
+                console.log(username)
+                wishError.textContent = data.errors.wish1;
+            }
+            if (data.wish) {
+                // Refresh the page after successful submission
+                location.reload();
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    });
+    // <%= ++wishlist.length %>
+</script>
+
+<%- include("partials/footer"); -%>

@@ -1,0 +1,11 @@
+nav {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+}
+
+.username:hover {
+    cursor: pointer;
+}
