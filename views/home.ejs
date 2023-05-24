@@ -1,18 +1,35 @@
 <%- include("partials/header"); -%>
-<% if (user.username === id) { %>
+<% if (user.username === id || user.isAdmin === true) { %>
     <form class="add-doc">
         <h2>Create a wishlist</h2>
-        <label for="wish">Wish <%= ++wishlist.length %>:</label>
+        <label for="wish">Your wish:</label>
         <input type="text" name="wish" required>
         <div class="wish error"></div>
         <button>Add Wish</button>
     </form>
+
+    <div>
+        <% wishlist.forEach(function(wishlist) { %>
+            <p><li class="username"><%= wishlist.username %></li> - <%= wishlist.wish1 %></p>
+
+            <form class="delete-doc">
+                <button class="wish-delete" data-doc="<%= wishlist._id %>">Delete Wish</button>
+            </form>
+
+            <form class="wish-update">
+                <h3>Update Wish</h3>
+                <label for="updatedwish">Updated wish:</label>
+                <input type="text" name="updatedwish" required>
+
+                <input type="hidden" value="<%= wishlist._id %>" name="updatewishid">
+                <button>Update Wish</button>
+            </form>
+
+        <% }); %>
+    </div>
 <% } else { %>
     <h2>You are not authorized to view this page</h2>
 <% } %>
-<div>
-    
-</div>
 
 <script>
     // Adding wish
@@ -40,15 +57,69 @@
                 console.log(username)
                 wishError.textContent = data.errors.wish1;
             }
-            if (data.wish) {
-                // Refresh the page after successful submission
+            if (data.redirect) {
                 location.reload();
             }
         } catch (err) {
             console.log(err);
         }
     });
-    // <%= ++wishlist.length %>
+
+    // Deleting document frontend
+    const deleteButtons = document.querySelectorAll(".wish-delete");
+
+    deleteButtons.forEach(button => {
+    button.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const id = e.target.dataset.doc;
+    
+        try {
+            const res = await fetch(`/deletewish/${id}`, {
+                method: "DELETE"
+            });
+
+            const data = await res.json();
+            console.log(data);
+
+            if (data.redirect) {
+                location.reload();
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+
+// Updating a document
+const updateForm = document.querySelectorAll(".wish-update")
+
+updateForm.forEach((updatedForm) => {
+    updatedForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const wish1 = updatedForm.updatedwish.value
+        const id = updatedForm.updatewishid.value
+
+        console.log(wish1, id)
+
+        try {
+            const res = await fetch(`/updatewish`, {
+                method: "POST",
+                body: JSON.stringify({ wish1, id }),
+                headers: { "Content-Type": "application/json" }
+            })
+            const data = await res.json();
+            console.log(data);
+
+            if (data.response) {
+                location.reload();
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    })
+});
 </script>
 
 <%- include("partials/footer"); -%>

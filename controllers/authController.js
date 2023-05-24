@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Wishlist = require("../models/Wishlist");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
 const { requireAuth, checkUser, loadWishList } = require("../middleware/authMiddleware");
 require('dotenv').config();
 
@@ -53,18 +54,31 @@ module.exports.id_get = [checkUser, async (req,res) => {
     const id = req.params.id
     const list = await Wishlist.find({ username: id })
     const wishlists = () =>
-              res.render('target', { wishlist: id })
-          wishlists()
+              res.render('target', { wishlist: list, id })
+          wishlists();
 }]
 
 // Get user home page with ID
-module.exports.homepage_get = [checkUser, loadWishList, async (req,res) => {
+module.exports.homepage_get = [checkUser, async (req,res) => {
     const id = req.params.id
     const list = await Wishlist.find({ username: id })
     const wishlists = () =>
-              res.render('home', { wishlist: wishlists, id })
-          wishlists()
+              res.render('home', { wishlist: list, id })
+          wishlists();
 }];
+
+// Delete wish
+module.exports.deletewish_delete = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const result = await Wishlist.findByIdAndDelete(id);
+        res.json({ redirect: `/deletewish/${id}` })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: "The developer sucks" })
+    }
+};
 
 // Add wish
 module.exports.addwish_post = [requireAuth, async (req, res) => {
@@ -76,6 +90,20 @@ module.exports.addwish_post = [requireAuth, async (req, res) => {
     catch (err) {
         const errors = handleErrors(err);
         res.status(400).json({ errors })
+    }
+}];
+
+// Update a wish
+module.exports.updatewish_post = [requireAuth, async (req, res) => {
+    const { wish1, id } = req.body;
+
+    try {
+        const result = await Wishlist.findByIdAndUpdate(id, { wish1 });
+        res.status(200).json({response:"cool console response"});
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ error: "the dev actually sucks" })
     }
 }];
 

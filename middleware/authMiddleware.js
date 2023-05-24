@@ -46,7 +46,7 @@ const checkUser = (req, res, next) => {
 
 const loadWishList = async (req, res, next) => {
     try {
-        const wishlist = await Wishlist.findOne({ wish1, wish2, wish3, wish4, wish5, username });
+        const wishlist = await Wishlist.findOne({ wish1, username });
 
         res.locals.wishlist = wishlist;
         next();

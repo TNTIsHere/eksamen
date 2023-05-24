@@ -1,11 +1,93 @@
-nav {
-    text-align: center;
+/* Navbar/overall website styles */
+
+body {
+    background-color: rgb(188, 221, 250);
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
 }
 
-footer {
-    text-align: center;
+nav {
+    background-color: rgb(216, 150, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-elements {
+    display: flex;
+    align-items: center;
+}
+
+.right-elements {
+    display: flex;
+    align-items: center;
+    padding-right: 100px;
+}
+
+nav h2 {
+    margin: 0;
+}
+
+nav #logo {
+    padding-left: 100px;
+    font-size: 1.5em;
+    color: blue;
+}
+
+#wishlist {
+    font-size: 2em;
+    padding-left: 715px;
+}
+
+#wishlist-user {
+    font-size: 2em;
+    padding-left: 620px;
+}
+
+.welcome {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: blue;
+    text-decoration: underline;
+}
+
+#logout {
+    font-size: 1.2em;
+    color: blue;
+}
+
+#sign-in {
+    padding-right: 0;
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#sign-up {
+    padding-left: 50px;
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 .username:hover {
     cursor: pointer;
+}
+
+.welcome:hover {
+    cursor: pointer;
+}
+
+/* Index.ejs styles */
+
+#index-list {
+    text-align: center;
+}
+
+/* Footer styles */
+
+footer {
+    text-align: center;
 }

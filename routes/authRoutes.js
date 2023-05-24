@@ -12,5 +12,7 @@ router.get("/:id", authController.id_get);
 router.post("/addwish", authController.addwish_post);
 router.post("/sign-in", authController.login_post);
 router.post("/sign-up", authController.signup_post);
+router.post("/updatewish", authController.updatewish_post);
+router.delete("/deletewish/:id", authController.deletewish_delete);
 
 module.exports = router;

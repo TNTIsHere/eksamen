@@ -24,17 +24,19 @@ mongoose.connect(DBURL, { useNewUrlParser: true })
 
 app.get("*", checkUser);
 app.get("/", (req, res) => {
-    Wishlist.find()
-    .sort({ _id: -1 })
-    .limit(5)
-    .then((wishlists) => {
+    Wishlist.aggregate([
+      { $sort: { _id: -1 } },
+      { $group: { _id: "$username", wishlist: { $first: "$$ROOT" } } },
+      { $limit: 5 }
+    ])
+      .then((wishlists) => {
         res.render("index", { wishlists });
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.error("Error fetching documents", error);
         res.render("index", { wishlists: [] });
-    })
-});
+      });
+  });
 
 
 app.use(authRoutes);

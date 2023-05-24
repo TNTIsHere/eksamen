@@ -3,24 +3,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <title>Wishlist</title>
 </head>
 <body>
     <nav>
-        <h2 id="logo"><a href="/">Logo</a></h2>
-        <h1>Wishlist</h1>
-
-        <% if (user) { %>
-            <p data-doc="<%= user.username %>" class="welcome">Welcome back, <%= user.username %></p>
-            <h2><a href="/logout">Log out</a></h2>
-            <% if (user.isAdmin === true) { %>
-                <h2><a href="/adminsecret">Admin page</a></h2>
+        <div class="left-elements">
+            <h2><a href="/" class="nav-element" id="logo">Logo</a></h2>
+            <% if (user) { %>
+                <h1 id="wishlist-user">Wishlist - <%=user.username %></h1>
             <% } else { %>
-
+            <h1 id="wishlist">Wishlist</h1>
             <% } %>
+        </div>
+      
+        <% if (user) { %>
+            <div class="right-elements">
+                <div>
+                    <p data-doc="<%= user.username %>" class="welcome" data-doc="<%= user.username %>">Welcome back, <%= user.username %></p>
+                    <h2><a href="/logout" id="logout">Log out</a></h2>
+                </div>
+                <% if (user.isAdmin === true) { %>
+                    <h2><a href="/adminsecret">Admin page</a></h2>
+                <% } else { %>
+                <% } %>
+            </div>
         <% } else { %>
-            <h2><a href="/sign-in">Sign in</a></h2>
-            <h2><a href="/sign-up">Sign up</a></h2>
+            <div class="right-elements">
+                <h2><a href="/sign-in" id="sign-in">Sign in</a></h2>
+                <h2><a href="/sign-up" id="sign-up">Sign up</a></h2>
+            </div>
         <% } %>
     </nav>
+    
+    <script defer>
+        const redirectNav = document.querySelectorAll('.welcome');
+        redirectNav.forEach(redirectNav => {
+            redirectNav.addEventListener('click', e => {
+                e.preventDefault();
+                location.assign(`/home/${redirectNav.dataset.doc}`);
+            });
+        });
+    </script>
