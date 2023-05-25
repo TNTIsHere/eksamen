@@ -1,13 +1,14 @@
 <%- include("partials/header"); -%>
 
-<div id="index-list">
+<div class="wish-list">
     <h1>Check out these wishlists</h1>
         <% wishlists.forEach(function(wishlist) { %>
-            <div id="index-content">
-                <h2 class="username"><%= wishlist.wishlist.username %></h2><p> - <%= wishlist.wishlist.wish1 %></p>
+            <div class="wish-content">
+                <h2 class="username"><%= wishlist.wishlist.username %></h2><p class="wish"> - <%= wishlist.wishlist.wish1 %></p>
             </div>
         <% }); %>
 </div>
+<br>
 
 <script>
     const redirectIndex = document.querySelectorAll('.username');

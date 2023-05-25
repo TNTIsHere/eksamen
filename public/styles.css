@@ -13,6 +13,10 @@ nav {
     align-items: center;
 }
 
+.center {
+    text-align: center;
+}
+
 .left-elements {
     display: flex;
     align-items: center;
@@ -36,12 +40,7 @@ nav #logo {
 
 #wishlist {
     font-size: 2em;
-    padding-left: 715px;
-}
-
-#wishlist-user {
-    font-size: 2em;
-    padding-left: 620px;
+    padding-left: 700px;
 }
 
 .welcome {
@@ -80,10 +79,14 @@ nav #logo {
     cursor: pointer;
 }
 
-/* Index.ejs styles */
+/* Display wishes */
 
-#index-list {
+.wish-list {
     text-align: center;
+}
+
+.wish {
+    margin-bottom: 40px;
 }
 
 /* Footer styles */

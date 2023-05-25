@@ -1,8 +1,10 @@
 <%- include("partials/header"); -%>
 
-<div>
+<div class="wish-list">
     <% wishlist.forEach(function(wishlist) { %>
-        <p><li class="username"><%= wishlist.username %></li> - <%= wishlist.wish1 %></p>
+        <div class="wish-content">
+            <h2 class="username"><%= wishlist.username %></h2><p class="wish"> - <%= wishlist.wish1 %></p>
+        </div>
     <% }); %>
 </div>
 
