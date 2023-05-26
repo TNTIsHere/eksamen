@@ -5,8 +5,11 @@
         <label for="wish">Your wish:</label>
         <input type="text" name="wish" required>
         <div class="wish error"></div>
-        <button>Add Wish</button>
+        <button class="cool-btn">Add Wish</button>
     </form>
+    <div class="center">
+        <h2 class="manual" data-doc="<%= user.username %>">User Manual</h2>
+    </div>
     <hr>
     <div class="wish-list">
         <% wishlist.forEach(function(wishlist) { %>
@@ -15,16 +18,16 @@
             </div>
 
             <form class="delete-doc">
-                <button class="wish-delete" data-doc="<%= wishlist._id %>">Delete Wish</button>
+                <button class="wish-delete cool-btn" data-doc="<%= wishlist._id %>">Delete Wish</button>
             </form>
 
             <form class="wish-update">
                 <h3>Update Wish</h3>
                 <label for="updatedwish">Updated wish:</label>
-                <input type="text" name="updatedwish" required>
+                <input type="text" value="<%= wishlist.wish1 %>" name="updatedwish" required>
 
                 <input type="hidden" value="<%= wishlist._id %>" name="updatewishid">
-                <button>Update Wish</button>
+                <button class="cool-btn">Update Wish</button>
                 <hr>
             </form>
 
@@ -123,6 +126,15 @@ updateForm.forEach((updatedForm) => {
         }
     })
 });
+
+// Redirect to user manual
+const redirectManual = document.querySelector('.manual');
+
+    redirectManual.addEventListener('click', e => {
+        e.preventDefault();
+        location.assign(`/home/${redirectManual.dataset.doc}/manual`);
+});
+
 </script>
 
 <%- include("partials/footer"); -%>

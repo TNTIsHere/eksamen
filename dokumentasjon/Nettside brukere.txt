@@ -4,8 +4,11 @@ test test69
 
 test123 test123
 
-fuckyou fuckyou
+cooluser cooluser
 
 troll troll1
 
-lol lol123 | admin bruker
+lol lol123 | admin bruker har rettigheter til å slette andre sine wishes
+
+Server brukere
+

@@ -86,16 +86,19 @@ nav #logo {
 }
 
 .wish {
+    font-size: 150%;
     margin-bottom: 40px;
 }
 
 /* Sign-in/Sign-up styles */
 
 .sign-in-form {
+    font-size: 150%;
     text-align: center;
 }
 
 .sign-up-form {
+    font-size: 150%;
     text-align: center;
 }
 
@@ -118,8 +121,30 @@ nav #logo {
     cursor: pointer;
 }
 
+/* Home styles */
+.add-doc {
+    font-size: 130%;
+}
+
+.wish-update {
+    font-size: 130%;
+}
+
+.manual {
+    color: blue;
+    text-decoration: underline;
+}
+
+.manual:hover {
+    cursor: pointer;
+}
+
+.manual-text {
+    font-size: 130%;
+}
+
 /* Footer styles */
 
 footer {
-    text-align: center;
+    text-align: center !important;
 }

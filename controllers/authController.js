@@ -49,6 +49,10 @@ module.exports.login_get = (req, res) => {
     res.render("sign-in");
 }
 
+module.exports.manual_get = [checkUser, (req, res) => {
+    res.render("manual");
+}]
+
 // Get user page with ID
 module.exports.id_get = [checkUser, async (req,res) => {
     const id = req.params.id
